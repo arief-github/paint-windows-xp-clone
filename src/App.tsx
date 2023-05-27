@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useCanvas } from "./context/CanvasContext";
+
 import { setCanvasSize, clearCanvas, drawStroke } from "./utils/canvasUtils";
 import { useSelector, useDispatch } from "react-redux";
 import { beginStroke, endStroke, updateStroke } from "./modules/currentStroke/actions";
@@ -9,13 +11,14 @@ import { historyIndexSelector } from './modules/historyIndex/selector'
 
 import ColorPanel from "./components/ColorPanel";
 import EditPanel from "./components/EditPanel";
+import FilePanel from "./components/FIlePanel";
 
 function App() {
   const WIDTH = 1024;
   const HEIGHT = 768;
   const dispatch = useDispatch();
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useCanvas();
 
   const getCanvasWithContext = (canvas = canvasRef.current) => {
     return { canvas, context: canvas?.getContext("2d") };
@@ -105,6 +108,7 @@ function App() {
             <button aria-label="Close" />
           </div>
         </div>
+        <FilePanel/>
         <EditPanel/>
         <ColorPanel/>
         <canvas 
