@@ -1,8 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import { setCanvasSize, clearCanvas, drawStroke } from "./utils/canvasUtils";
 import { useSelector, useDispatch } from "react-redux";
-import { beginStroke, endStroke, updateStroke } from "./actions/actions";
-import { currentStrokeSelector, historyIndexSelector, strokesSelector } from "./selector/selector";
+import { beginStroke, endStroke, updateStroke } from "./modules/currentStroke/actions";
+
+import { strokesSelector } from "./modules/strokes/selector";
+import { currentStrokeSelector } from './modules/currentStroke/selector'
+import { historyIndexSelector } from './modules/historyIndex/selector'
+
 import ColorPanel from "./components/ColorPanel";
 import EditPanel from "./components/EditPanel";
 
@@ -80,7 +84,7 @@ function App() {
   
   const endDrawing = () => {
     if(isDrawing) {
-      dispatch(endStroke());
+      dispatch(endStroke(historyIndex, currentStroke));
     }
   };
 
