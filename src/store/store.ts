@@ -11,7 +11,6 @@ export const store = configureStore({
     strokes,
     currentStroke
   },
-  middleware: (getDefaultMiddleware) => {
-    getDefaultMiddleware().concat(logger);
-  }
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(logger)
 })
