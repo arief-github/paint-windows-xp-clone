@@ -3,7 +3,8 @@ import { useCanvas } from "./context/CanvasContext";
 
 import { setCanvasSize, clearCanvas, drawStroke } from "./utils/canvasUtils";
 import { useSelector, useDispatch } from "react-redux";
-import { beginStroke, endStroke, updateStroke } from "./modules/currentStroke/actions";
+import { beginStroke, updateStroke } from "./modules/currentStroke/actions";
+import { endStroke } from './modules/sharedActions';
 
 import { strokesSelector } from "./modules/strokes/selector";
 import { currentStrokeSelector } from './modules/currentStroke/selector'
@@ -82,12 +83,12 @@ function App() {
 
   const startDrawing = ({ nativeEvent } : React.MouseEvent<HTMLCanvasElement> ) => {
     const { offsetX, offsetY } = nativeEvent;
-    dispatch(beginStroke(offsetX, offsetY));
+    dispatch(beginStroke({x : offsetX, y: offsetY}));
   };
   
   const endDrawing = () => {
     if(isDrawing) {
-      dispatch(endStroke(historyIndex, currentStroke));
+      dispatch(endStroke({historyIndex: historyIndex, stroke:  currentStroke}));
     }
   };
 
@@ -97,7 +98,7 @@ function App() {
     }
 
     const { offsetX, offsetY } = nativeEvent;
-    dispatch(updateStroke(offsetX, offsetY))
+    dispatch(updateStroke({x: offsetX, y: offsetY}))
   };
 
   return (

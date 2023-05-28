@@ -1,11 +1,6 @@
-import {
-    Action,
-    UPDATE_STROKE,
-    BEGIN_STROKE,
-    END_STROKE,
-    SET_STROKE_COLOR
-  } from "./actions"
   import { RootState } from "../../utils/type"
+  import { Action, beginStroke, updateStroke, setStrokeColor } from './actions';
+  import { endStroke } from '../sharedActions';
   
   const initialState: RootState["currentStroke"] = {
     points: [],
@@ -17,22 +12,22 @@ import {
     action: Action
   ) => {
     switch (action.type) {
-      case BEGIN_STROKE: {
+      case beginStroke.toString(): {
         return { ...state, points: [action.payload] }
       }
-      case UPDATE_STROKE: {
+      case updateStroke.toString(): {
         return {
           ...state,
           points: [...state.points, action.payload]
         }
       }
-      case SET_STROKE_COLOR: {
+      case setStrokeColor.toString(): {
         return {
           ...state,
           color: action.payload
         }
       }
-      case END_STROKE: {
+      case endStroke.toString(): {
         return {
           ...state,
           points: []
