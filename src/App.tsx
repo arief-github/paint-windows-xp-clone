@@ -13,6 +13,7 @@ import { historyIndexSelector } from './modules/historyIndex/selector'
 import ColorPanel from "./components/ColorPanel";
 import EditPanel from "./components/EditPanel";
 import FilePanel from "./components/FIlePanel";
+import ModalLayer from "./components/ModalLayer";
 
 function App() {
   const WIDTH = 1024;
@@ -112,6 +113,7 @@ function App() {
         <FilePanel/>
         <EditPanel/>
         <ColorPanel/>
+        <ModalLayer/>
         <canvas 
           ref={canvasRef} 
           onMouseDown={startDrawing}
